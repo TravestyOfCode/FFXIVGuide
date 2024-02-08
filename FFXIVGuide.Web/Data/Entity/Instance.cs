@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System.Collections.Generic;
 
-namespace FFXIVGuide.Web.Data;
+namespace FFXIVGuide.Web.Data.Entity;
 
 public class Instance
 {

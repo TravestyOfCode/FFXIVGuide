@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace FFXIVGuide.Web.Data;
+namespace FFXIVGuide.Web.Data.Entity;
 
 public class Note
 {
