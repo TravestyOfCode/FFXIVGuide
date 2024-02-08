@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFXIVGuide.Web", "FFXIVGuide.Web\FFXIVGuide.Web.csproj", "{ED238ABB-87CE-4752-93C6-66979AE33EAA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ED238ABB-87CE-4752-93C6-66979AE33EAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED238ABB-87CE-4752-93C6-66979AE33EAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED238ABB-87CE-4752-93C6-66979AE33EAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED238ABB-87CE-4752-93C6-66979AE33EAA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {449565CE-53D7-4334-8B43-5FA22BE04932}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,27 @@
+{
+  "version": "1.0",
+  "defaultProvider": "unpkg",
+  "libraries": [
+    {
+      "library": "bootstrap@5.3.2",
+      "destination": "wwwroot/lib/bootstrap/"
+    },
+    {
+      "library": "htmx.org@1.9.10",
+      "destination": "wwwroot/lib/htmx.org/",
+      "files": [
+        "LICENSE",
+        "dist/htmx.min.js"
+      ]
+    },
+    {
+      "library": "aspnet-client-validation@0.9.3",
+      "destination": "wwwroot/lib/aspnet-client-validation/",
+      "files": [
+        "dist/aspnet-validation.css",
+        "dist/aspnet-validation.min.js",
+        "LICENSE"
+      ]
+    }
+  ]
+}
