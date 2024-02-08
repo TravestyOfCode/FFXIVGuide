@@ -1,0 +1,10 @@
+﻿@model Dictionary<int, string>
+
+<label class="form-label">Roulette Type</label>
+<select class="form-select mb-2">
+    <option value=""></option>
+    @foreach(var kvp in Model)
+    {
+        <option value="@kvp.Key">@kvp.Value</option>
+    }
+</select>

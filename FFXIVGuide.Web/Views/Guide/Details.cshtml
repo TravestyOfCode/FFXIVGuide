@@ -1,0 +1,18 @@
+﻿@model FFXIVGuide.Web.Models.Guide.InstanceDetailModel
+
+<div class="col-lg-9">
+    <div class="card border-0 shadow-none mb-3">
+        <img src="@Model.ImageUrl" class="card-img" />
+            <div class="card-img-overlay d-flex">
+                <h1 class="card-title fw-bolder align-self-center">@Model.Name</h1>
+            </div>
+    </div>
+
+    <div id="encounters">
+        @foreach (var encounter in Model.Encounters)
+        {
+            <partial name="Encounter" for="@encounter" />
+        }
+    </div>
+
+</div>

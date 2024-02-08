@@ -1,0 +1,13 @@
+﻿@model FFXIVGuide.Web.Models.Guide.IndexViewModel
+
+@{
+    ViewData["Title"] = "FFXIV Guide";
+}
+
+<div class="container-fluid">
+<div class="row min-vh-100">
+    <partial name="Sidebar" for="Sidebar" />
+
+    <partial name="Details" for="Instance" />
+    </div>
+</div>

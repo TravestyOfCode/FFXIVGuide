@@ -21,6 +21,13 @@ body {
   margin-bottom: 60px;
 }
 
+.card-img {
+    mask-image: linear-gradient(to top, transparent 5%, black 100%);
+    object-fit: cover;
+    height: 10rem;
+}
+}
+
 .btn-outline-none {
     --bs-btn-border-width: 0px;
 }

@@ -1,0 +1,17 @@
+﻿@model FFXIVGuide.Web.Models.Guide.EncounterModel
+
+<div class="card">
+    <div class="card-header" id="encounter-header-@Model.Id">
+        <div class="card-title" role="button" data-bs-toggle="collapse" data-bs-target="#encounter-@Model.Id" aria-expanded="false" aria-controls="encounter-@Model.Id">
+            @Model.Name
+        </div>
+    </div>
+    <div id="encounter-@Model.Id" class="collapse" aria-labelledby="encounter-header-@Model.Id" data-bs-parent="#encounters">
+        <div class="card-body">
+            @foreach(var note in Model.Notes)
+            {
+                <div role="button" class="border w-100 my-3 p-3" onclick="CopyToClipboard(this)">@note</div>
+            }            
+        </div>
+    </div>
+</div>
