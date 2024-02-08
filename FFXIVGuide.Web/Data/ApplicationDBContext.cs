@@ -5,6 +5,12 @@ namespace FFXIVGuide.Web.Data;
 
 public class ApplicationDBContext : IdentityDbContext<ApplicationUser>
 {
+    public DbSet<Instance> Instances { get; set; }
+
+    public DbSet<Encounter> Encounters { get; set; }
+
+    public DbSet<Note> Notes { get; set; }
+
     public ApplicationDBContext(DbContextOptions options) : base(options)
     {
     }
