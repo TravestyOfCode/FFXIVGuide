@@ -1,4 +1,5 @@
 using FFXIVGuide.Web.Data;
+using FFXIVGuide.Web.Data.RouletteType.Behaviors;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -24,6 +25,7 @@ public class Program
         builder.Services.AddMediatR(config =>
         {
             config.RegisterServicesFromAssembly(System.Reflection.Assembly.GetExecutingAssembly());
+            config.AddRouletteTypeBehaviors();
         });
 
         var app = builder.Build();
