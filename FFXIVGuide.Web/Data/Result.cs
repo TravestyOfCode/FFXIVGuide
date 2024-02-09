@@ -18,6 +18,7 @@ public class Result : IResult
     }
 
     public static Result Ok() => new(200);
+    public static Result<T> Ok<T>() => new(200, default);
     public static Result<T> Ok<T>(T value) => new(200, value);
 
     public static Result Created() => new(201);
