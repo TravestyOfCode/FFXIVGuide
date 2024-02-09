@@ -12,6 +12,10 @@ public class Instance
 
     public string ImageUrl { get; set; }
 
+    public int RouletteTypeId { get; set; }
+
+    public RouletteType RouletteType { get; set; }
+
     public IEnumerable<Encounter> Encounters { get; set; }
 }
 
@@ -30,6 +34,12 @@ public class InstanceConfiguration : IEntityTypeConfiguration<Instance>
         builder.Property(p => p.ImageUrl)
             .IsRequired(false)
             .HasMaxLength(256);
+
+        builder.HasOne(p => p.RouletteType)
+            .WithMany(p => p.Instances)
+            .HasPrincipalKey(p => p.Id)
+            .HasForeignKey(p => p.RouletteTypeId)
+            .OnDelete(DeleteBehavior.Cascade);
 
         builder.HasMany(p => p.Encounters)
             .WithOne(p => p.Instance)
