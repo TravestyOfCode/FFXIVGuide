@@ -1,4 +1,5 @@
 using FFXIVGuide.Web.Data;
+using FFXIVGuide.Web.Data.Instance.Behaviors;
 using FFXIVGuide.Web.Data.RouletteType.Behaviors;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +27,7 @@ public class Program
         {
             config.RegisterServicesFromAssembly(System.Reflection.Assembly.GetExecutingAssembly());
             config.AddRouletteTypeBehaviors();
+            config.AddInstanceBehaviors();
         });
 
         var app = builder.Build();

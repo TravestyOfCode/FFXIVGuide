@@ -1,0 +1,38 @@
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace FFXIVGuide.Web.Data.Instance.Queries;
+
+public class GetInstanceById : IRequest<Result<InstanceModel>>
+{
+    public int Id { get; set; }
+}
+
+public class GetInstanceByIdHandler : IRequestHandler<GetInstanceById, Result<InstanceModel>>
+{
+    private readonly ApplicationDBContext _dbContext;
+
+    private readonly ILogger<GetInstanceByIdHandler> _logger;
+
+    public GetInstanceByIdHandler(ApplicationDBContext dbContext, ILogger<GetInstanceByIdHandler> logger)
+    {
+        _dbContext = dbContext;
+        _logger = logger;
+    }
+
+    public async Task<Result<InstanceModel>> Handle(GetInstanceById request, CancellationToken cancellationToken)
+    {
+        try
+        {
+            var entity = await _dbContext.Instances
+                .SingleOrDefaultAsync(p => p.Id.Equals(request.Id), cancellationToken);
+
+            return entity == null ? Result.NotFound<InstanceModel>() : Result.Ok(entity.AsModel());
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Unexpected error.");
+
+            return Result.ServerError<InstanceModel>();
+        }
+    }
+}
