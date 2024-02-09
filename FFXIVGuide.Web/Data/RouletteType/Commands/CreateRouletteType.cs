@@ -1,6 +1,4 @@
-﻿using MediatR;
-
-namespace FFXIVGuide.Web.Data.RouletteType.Commands;
+﻿namespace FFXIVGuide.Web.Data.RouletteType.Commands;
 
 public class CreateRouletteType : IRequest<Result<RouletteTypeModel>>
 {

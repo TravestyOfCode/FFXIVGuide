@@ -1,5 +1,4 @@
 ﻿using FFXIVGuide.Web.Data.RouletteType.Commands;
-using MediatR;
 
 namespace FFXIVGuide.Web.Data.RouletteType.Behaviors;
 
