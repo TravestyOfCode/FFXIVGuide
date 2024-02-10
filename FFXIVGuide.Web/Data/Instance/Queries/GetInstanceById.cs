@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace FFXIVGuide.Web.Data.Instance.Queries;
 
@@ -24,9 +25,16 @@ public class GetInstanceByIdHandler : IRequestHandler<GetInstanceById, Result<In
         try
         {
             var entity = await _dbContext.Instances
-                .SingleOrDefaultAsync(p => p.Id.Equals(request.Id), cancellationToken);
+                .Where(p => p.Id.Equals(request.Id))
+                .ProjectToModel()
+                .SingleOrDefaultAsync(cancellationToken);
 
-            return entity == null ? Result.NotFound<InstanceModel>() : Result.Ok(entity.AsModel());
+            if (entity == null)
+            {
+                return Result.NotFound<InstanceModel>();
+            }
+
+            return Result.Ok(entity);
         }
         catch (Exception ex)
         {

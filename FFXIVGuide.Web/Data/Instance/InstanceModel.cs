@@ -1,4 +1,5 @@
 ﻿using FFXIVGuide.Web.Data.RouletteType;
+using System.Linq;
 
 namespace FFXIVGuide.Web.Data.Instance;
 
@@ -27,5 +28,17 @@ public static class InstanceModelExtensions
             RouletteType = entity.RouletteType.AsModel(),
             ImageUrl = entity.ImageUrl
         };
+    }
+
+    public static IQueryable<InstanceModel> ProjectToModel(this IQueryable<Entity.Instance> query)
+    {
+        return query?.Select(p => new InstanceModel()
+        {
+            Id = p.Id,
+            Name = p.Name,
+            RouletteTypeId = p.RouletteTypeId,
+            RouletteType = p.RouletteType.AsModel(),
+            ImageUrl = p.ImageUrl
+        });
     }
 }
