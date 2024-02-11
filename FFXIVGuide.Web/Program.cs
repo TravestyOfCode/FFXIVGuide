@@ -3,6 +3,7 @@ using FFXIVGuide.Web.Data.Encounter.Behaviors;
 using FFXIVGuide.Web.Data.Instance.Behaviors;
 using FFXIVGuide.Web.Data.Note.Behaviors;
 using FFXIVGuide.Web.Data.RouletteType.Behaviors;
+using FFXIVGuide.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -33,6 +34,10 @@ public class Program
             config.AddEncounterBehaviors();
             config.AddNoteBehaviors();
         });
+
+        // Add User Services
+        builder.Services.AddHttpContextAccessor();
+        builder.Services.AddScoped<IUserAccessor, HttpContextUserAccessor>();
 
         var app = builder.Build();
 
