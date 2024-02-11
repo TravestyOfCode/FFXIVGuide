@@ -1,6 +1,7 @@
 using FFXIVGuide.Web.Data;
 using FFXIVGuide.Web.Data.Encounter.Behaviors;
 using FFXIVGuide.Web.Data.Instance.Behaviors;
+using FFXIVGuide.Web.Data.Note.Behaviors;
 using FFXIVGuide.Web.Data.RouletteType.Behaviors;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
@@ -30,6 +31,7 @@ public class Program
             config.AddRouletteTypeBehaviors();
             config.AddInstanceBehaviors();
             config.AddEncounterBehaviors();
+            config.AddNoteBehaviors();
         });
 
         var app = builder.Build();
