@@ -19,9 +19,8 @@ public class DeleteNoteValidation : IPipelineBehavior<DeleteNote, Result<Unit>>
     {
         try
         {
-            // Check if exists, as tracking so the delete handler
-            // will not need a db query.
-            if (await _dbContext.Notes.AsTracking().SingleOrDefaultAsync(p => p.Id.Equals(request.Id), cancellationToken) == null)
+            // Check if exists
+            if (!await _dbContext.Notes.AnyAsync(p => p.Id.Equals(request.Id), cancellationToken))
             {
                 return Result.NotFound<Unit>();
             }
