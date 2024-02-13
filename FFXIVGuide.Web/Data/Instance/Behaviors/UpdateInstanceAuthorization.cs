@@ -1,4 +1,5 @@
 ﻿using FFXIVGuide.Web.Data.Instance.Commands;
+using FFXIVGuide.Web.Services;
 
 namespace FFXIVGuide.Web.Data.Instance.Behaviors;
 
@@ -6,17 +7,24 @@ public class UpdateInstanceAuthorization : IPipelineBehavior<UpdateInstance, Res
 {
     private readonly ILogger<UpdateInstanceAuthorization> _logger;
 
-    public UpdateInstanceAuthorization(ILogger<UpdateInstanceAuthorization> logger)
+    private readonly IUserAccessor _user;
+
+    public UpdateInstanceAuthorization(ILogger<UpdateInstanceAuthorization> logger, IUserAccessor user)
     {
         _logger = logger;
+        _user = user;
     }
 
     public async Task<Result<InstanceModel>> Handle(UpdateInstance request, RequestHandlerDelegate<Result<InstanceModel>> next, CancellationToken cancellationToken)
     {
         try
         {
-            // TODO: User can update their own Instances, Admin can
-            // update any instance.
+            // Only Admin can update Instance
+            if (!_user.CurrentUser.IsInRole("Admin"))
+            {
+                return Result.Forbidden<InstanceModel>();
+            }
+
             return await next();
         }
         catch (Exception ex)

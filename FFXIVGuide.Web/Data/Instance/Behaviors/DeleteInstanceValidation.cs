@@ -19,9 +19,8 @@ public class DeleteInstanceValidation : IPipelineBehavior<DeleteInstance, Result
     {
         try
         {
-            // Check if exists, as tracking so the delete handler
-            // will not need a db query.
-            if (await _dbContext.Instances.AsTracking().SingleOrDefaultAsync(p => p.Id.Equals(request.Id), cancellationToken) == null)
+            // Check if exists
+            if (!await _dbContext.Instances.AnyAsync(p => p.Id.Equals(request.Id), cancellationToken))
             {
                 return Result.NotFound<Unit>();
             }
