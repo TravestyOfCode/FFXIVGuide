@@ -1,5 +1,5 @@
-﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace FFXIVGuide.Web.Data.Instance.Commands;
 
@@ -24,17 +24,7 @@ public class DeleteInstanceHandler : IRequestHandler<DeleteInstance, Result<Unit
     {
         try
         {
-            var entity = await _dbContext.Instances
-                .SingleOrDefaultAsync(p => p.Id.Equals(request.Id), cancellationToken);
-
-            if (entity == null)
-            {
-                return Result.NotFound<Unit>();
-            }
-
-            _dbContext.Instances.Remove(entity);
-
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            await _dbContext.Instances.Where(p => p.Id.Equals(request.Id)).ExecuteDeleteAsync(cancellationToken);
 
             return Result.Ok<Unit>();
         }
