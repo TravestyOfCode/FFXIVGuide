@@ -1,4 +1,5 @@
 ﻿using FFXIVGuide.Web.Data.RouletteType.Commands;
+using FFXIVGuide.Web.Services;
 
 namespace FFXIVGuide.Web.Data.RouletteType.Behaviors;
 
@@ -6,16 +7,24 @@ public class UpdateRouletteTypeAuthorization : IPipelineBehavior<UpdateRouletteT
 {
     private readonly ILogger<UpdateRouletteTypeAuthorization> _logger;
 
-    public UpdateRouletteTypeAuthorization(ILogger<UpdateRouletteTypeAuthorization> logger)
+    private readonly IUserAccessor _user;
+
+    public UpdateRouletteTypeAuthorization(ILogger<UpdateRouletteTypeAuthorization> logger, IUserAccessor user)
     {
         _logger = logger;
+        _user = user;
     }
 
     public async Task<Result<RouletteTypeModel>> Handle(UpdateRouletteType request, RequestHandlerDelegate<Result<RouletteTypeModel>> next, CancellationToken cancellationToken)
     {
         try
         {
-            // TODO: Only an Admin role user will be able to update RouletteTypes
+            // Only an Admin can update RouletteTypes
+            if (!_user.CurrentUser.IsInRole("Admn"))
+            {
+                return Result.Forbidden<RouletteTypeModel>();
+            }
+
             return await next();
         }
         catch (Exception ex)

@@ -1,28 +1,37 @@
 ﻿using FFXIVGuide.Web.Data.RouletteType.Commands;
+using FFXIVGuide.Web.Services;
 
 namespace FFXIVGuide.Web.Data.RouletteType.Behaviors;
 
-public class DeleteRouletteTypeAuthorization : IPipelineBehavior<DeleteRouletteType, Result<RouletteTypeModel>>
+public class DeleteRouletteTypeAuthorization : IPipelineBehavior<DeleteRouletteType, Result<Unit>>
 {
     private readonly ILogger<DeleteRouletteTypeAuthorization> _logger;
 
-    public DeleteRouletteTypeAuthorization(ILogger<DeleteRouletteTypeAuthorization> logger)
+    private readonly IUserAccessor _user;
+
+    public DeleteRouletteTypeAuthorization(ILogger<DeleteRouletteTypeAuthorization> logger, IUserAccessor user)
     {
         _logger = logger;
+        _user = user;
     }
 
-    public async Task<Result<RouletteTypeModel>> Handle(DeleteRouletteType request, RequestHandlerDelegate<Result<RouletteTypeModel>> next, CancellationToken cancellationToken)
+    public async Task<Result<Unit>> Handle(DeleteRouletteType request, RequestHandlerDelegate<Result<Unit>> next, CancellationToken cancellationToken)
     {
         try
         {
-            // TODO: Only an Admin role user will be able to delete RouletteTypes
+            // Only an Admin can delete roulette types
+            if (!_user.CurrentUser.IsInRole("Admin"))
+            {
+                return Result.Forbidden<Unit>();
+            }
+
             return await next();
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Unexpected error.");
 
-            return Result.ServerError<RouletteTypeModel>();
+            return Result.ServerError<Unit>();
         }
     }
 }
