@@ -19,8 +19,8 @@ public class DeleteEncounterValidation : IPipelineBehavior<DeleteEncounter, Resu
     {
         try
         {
-            // Check if exists, as tracking so the delete handler
-            // will not need a db query.
+            // Check if exists
+            //if (!await _dbContext.Encounters.AnyAsync(p => p.Id.Equals(request.Id), cancellationToken))
             if (await _dbContext.Encounters.AsTracking().SingleOrDefaultAsync(p => p.Id.Equals(request.Id), cancellationToken) == null)
             {
                 return Result.NotFound<Unit>();
