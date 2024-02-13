@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace FFXIVGuide.Web.Data.Encounter.Commands;
 
@@ -23,17 +24,9 @@ public class DeleteEncounterHandler : IRequestHandler<DeleteEncounter, Result<Un
     {
         try
         {
-            var entity = await _dbContext.Encounters
-                .SingleOrDefaultAsync(p => p.Id.Equals(request.Id), cancellationToken);
-
-            if (entity == null)
-            {
-                return Result.NotFound<Unit>();
-            }
-
-            _dbContext.Encounters.Remove(entity);
-
-            await _dbContext.SaveChangesAsync(cancellationToken);
+            // All validation/authorization behaviors should have been processed,
+            // so no need to query/validate before.
+            await _dbContext.Encounters.Where(p => p.Id.Equals(request.Id)).ExecuteDeleteAsync(cancellationToken);
 
             return Result.Ok<Unit>();
         }
