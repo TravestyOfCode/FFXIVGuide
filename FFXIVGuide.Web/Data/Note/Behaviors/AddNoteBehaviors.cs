@@ -7,15 +7,15 @@ public static class NoteBehaviorsExtensions
     public static MediatRServiceConfiguration AddNoteBehaviors(this MediatRServiceConfiguration config)
     {
         // Create Behaviors
-        config.AddBehavior<CreateNoteAuthorization>(ServiceLifetime.Scoped);
         config.AddBehavior<CreateNoteValidation>(ServiceLifetime.Scoped);
+        config.AddBehavior<CreateNoteAuthorization>(ServiceLifetime.Scoped);
 
         // Update Behaviors
-        config.AddBehavior<UpdateNoteAuthorization>(ServiceLifetime.Scoped);
+        config.AddBehavior<UpdateNoteValidation>(ServiceLifetime.Scoped);
         config.AddBehavior<UpdateNoteAuthorization>(ServiceLifetime.Scoped);
 
         // Delete Behaviors
-        config.AddBehavior<DeleteNoteAuthorization>(ServiceLifetime.Scoped);
+        config.AddBehavior<DeleteNoteValidation>(ServiceLifetime.Scoped);
         config.AddBehavior<DeleteNoteAuthorization>(ServiceLifetime.Scoped);
 
         // Query Behaviors
