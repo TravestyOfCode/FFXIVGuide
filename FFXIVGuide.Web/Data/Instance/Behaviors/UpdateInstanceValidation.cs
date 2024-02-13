@@ -20,7 +20,7 @@ public class UpdateInstanceValidation : IPipelineBehavior<UpdateInstance, Result
     {
         try
         {
-            var result = Result.BadRequest();
+            var result = Result.BadRequest<InstanceModel>();
 
             // Check for duplicate name
             if (await _dbContext.Instances.AnyAsync(p => p.Name.Equals(request.Name) && p.Id != request.Id, cancellationToken))
