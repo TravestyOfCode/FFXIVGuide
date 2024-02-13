@@ -3,7 +3,7 @@ using FFXIVGuide.Web.Services;
 
 namespace FFXIVGuide.Web.Data.Instance.Behaviors;
 
-public class DeleteInstanceAuthorization : IPipelineBehavior<DeleteInstance, Result<InstanceModel>>
+public class DeleteInstanceAuthorization : IPipelineBehavior<DeleteInstance, Result<Unit>>
 {
     private readonly ILogger<DeleteInstanceAuthorization> _logger;
 
@@ -15,14 +15,14 @@ public class DeleteInstanceAuthorization : IPipelineBehavior<DeleteInstance, Res
         _user = user;
     }
 
-    public async Task<Result<InstanceModel>> Handle(DeleteInstance request, RequestHandlerDelegate<Result<InstanceModel>> next, CancellationToken cancellationToken)
+    public async Task<Result<Unit>> Handle(DeleteInstance request, RequestHandlerDelegate<Result<Unit>> next, CancellationToken cancellationToken)
     {
         try
         {
             // Only Admins can delete instances
             if (!_user.CurrentUser.IsInRole("Admin"))
             {
-                return Result.Forbidden<InstanceModel>();
+                return Result.Forbidden<Unit>();
             }
 
             return await next();
@@ -31,7 +31,7 @@ public class DeleteInstanceAuthorization : IPipelineBehavior<DeleteInstance, Res
         {
             _logger.LogError(ex, "Unexpected error.");
 
-            return Result.ServerError<InstanceModel>();
+            return Result.ServerError<Unit>();
         }
     }
 }

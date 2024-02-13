@@ -5,7 +5,7 @@ using System.Security.Claims;
 
 namespace FFXIVGuide.Web.Data.Encounter.Behaviors;
 
-public class DeleteEncounterAuthorization : IPipelineBehavior<DeleteEncounter, Result<EncounterModel>>
+public class DeleteEncounterAuthorization : IPipelineBehavior<DeleteEncounter, Result<Unit>>
 {
     private readonly IUserAccessor _user;
 
@@ -20,7 +20,7 @@ public class DeleteEncounterAuthorization : IPipelineBehavior<DeleteEncounter, R
         _dbContext = dbContext;
     }
 
-    public async Task<Result<EncounterModel>> Handle(DeleteEncounter request, RequestHandlerDelegate<Result<EncounterModel>> next, CancellationToken cancellationToken)
+    public async Task<Result<Unit>> Handle(DeleteEncounter request, RequestHandlerDelegate<Result<Unit>> next, CancellationToken cancellationToken)
     {
         try
         {
@@ -33,7 +33,7 @@ public class DeleteEncounterAuthorization : IPipelineBehavior<DeleteEncounter, R
                 //if (!await _dbContext.Encounters.AnyAsync(p => p.Id.Equals(request.Id) && p.OwnerId.Equals(userId), cancellationToken))
                 if (await _dbContext.Encounters.AsTracking().SingleOrDefaultAsync(p => p.Id.Equals(request.Id) && p.OwnerId.Equals(userId), cancellationToken) == null)
                 {
-                    return Result.Forbidden<EncounterModel>();
+                    return Result.Forbidden<Unit>();
                 }
             }
 
@@ -43,7 +43,7 @@ public class DeleteEncounterAuthorization : IPipelineBehavior<DeleteEncounter, R
         {
             _logger.LogError(ex, "Unexpected error.");
 
-            return Result.ServerError<EncounterModel>();
+            return Result.ServerError<Unit>();
         }
     }
 }
