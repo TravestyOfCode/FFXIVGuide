@@ -22,9 +22,16 @@ public class CreateEncounterAuthorization : IPipelineBehavior<CreateEncounter, R
         {
             // User can create encounters if they are the OwnerId
             // Admin can create for any OwnerId
-            if (!_user.CurrentUser.IsInRole("Admin") && !request.OwnerId.Equals(_user.CurrentUser.FindFirstValue(ClaimTypes.NameIdentifier)))
+            if (!_user.CurrentUser.IsInRole("Admin"))
             {
-                return Result.BadRequest<EncounterModel>();
+                var userId = _user.CurrentUser.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                ArgumentNullException.ThrowIfNull(userId);
+
+                if (!request.OwnerId.Equals(userId))
+                {
+                    return Result.BadRequest<EncounterModel>();
+                }
             }
 
             return await next();

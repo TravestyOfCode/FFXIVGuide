@@ -30,6 +30,8 @@ public class DeleteEncounterAuthorization : IPipelineBehavior<DeleteEncounter, R
             {
                 var userId = _user.CurrentUser.FindFirstValue(ClaimTypes.NameIdentifier);
 
+                ArgumentNullException.ThrowIfNull(userId);
+
                 //if (!await _dbContext.Encounters.AnyAsync(p => p.Id.Equals(request.Id) && p.OwnerId.Equals(userId), cancellationToken))
                 if (await _dbContext.Encounters.AsTracking().SingleOrDefaultAsync(p => p.Id.Equals(request.Id) && p.OwnerId.Equals(userId), cancellationToken) == null)
                 {
