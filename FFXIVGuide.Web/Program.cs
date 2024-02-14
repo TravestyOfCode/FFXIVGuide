@@ -1,4 +1,12 @@
+using FFXIVGuide.Web.Data;
+using FFXIVGuide.Web.Data.Encounter.Behaviors;
+using FFXIVGuide.Web.Data.Instance.Behaviors;
+using FFXIVGuide.Web.Data.Note.Behaviors;
+using FFXIVGuide.Web.Data.RouletteType.Behaviors;
+using FFXIVGuide.Web.Services;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -11,7 +19,25 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
+        builder.Services.AddDbContext<ApplicationDBContext>(options =>
+        {
+            options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+        });
+
         builder.Services.AddControllersWithViews();
+
+        builder.Services.AddMediatR(config =>
+        {
+            config.RegisterServicesFromAssembly(System.Reflection.Assembly.GetExecutingAssembly());
+            config.AddRouletteTypeBehaviors();
+            config.AddInstanceBehaviors();
+            config.AddEncounterBehaviors();
+            config.AddNoteBehaviors();
+        });
+
+        // Add User Services
+        builder.Services.AddHttpContextAccessor();
+        builder.Services.AddScoped<IUserAccessor, HttpContextUserAccessor>();
 
         var app = builder.Build();
 

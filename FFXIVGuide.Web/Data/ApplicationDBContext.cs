@@ -5,6 +5,14 @@ namespace FFXIVGuide.Web.Data;
 
 public class ApplicationDBContext : IdentityDbContext<ApplicationUser>
 {
+    public DbSet<Entity.RouletteType> RouletteTypes { get; set; }
+
+    public DbSet<Entity.Instance> Instances { get; set; }
+
+    public DbSet<Entity.Encounter> Encounters { get; set; }
+
+    public DbSet<Entity.Note> Notes { get; set; }
+
     public ApplicationDBContext(DbContextOptions options) : base(options)
     {
     }
