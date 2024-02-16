@@ -20,7 +20,7 @@ public class UpdateRouletteTypeAuthorization : IPipelineBehavior<UpdateRouletteT
         try
         {
             // Only an Admin can update RouletteTypes
-            if (!_user.CurrentUser.IsInRole("Admn"))
+            if (!_user.CurrentUser.IsInRole("Admin"))
             {
                 return Result.Forbidden<RouletteTypeModel>();
             }
