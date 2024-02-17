@@ -1,5 +1,4 @@
-﻿using FFXIVGuide.Web.Data.Result;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using System.IO;

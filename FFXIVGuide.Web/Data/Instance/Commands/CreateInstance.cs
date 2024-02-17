@@ -1,6 +1,4 @@
-﻿using FFXIVGuide.Web.Data.Result;
-
-namespace FFXIVGuide.Web.Data.Instance.Commands;
+﻿namespace FFXIVGuide.Web.Data.Instance.Commands;
 
 public class CreateInstance : IRequest<Result<InstanceModel>>
 {

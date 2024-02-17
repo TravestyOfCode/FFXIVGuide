@@ -1,5 +1,4 @@
-﻿using FFXIVGuide.Web.Data.Result;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace FFXIVGuide.Web.Data.Instance.Commands;
 
