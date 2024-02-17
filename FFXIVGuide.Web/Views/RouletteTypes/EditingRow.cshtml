@@ -1,0 +1,12 @@
+﻿@model FFXIVGuide.Web.Data.RouletteType.RouletteTypeModel
+
+<tr id="row-@Model.Id">
+    <form id="form-row-@Model.Id">
+        <input type="hidden" asp-for="Id" value="@Model.Id" />
+    <td><input asp-for="Name" class="form-control" value="@Model.Name" autofocus/><span class="text-danger" asp-validation-for="Name"></span></td>
+    <td class="text-end">
+        <button type="button" class="btn btn-success" hx-post="/RouletteTypes/Update" hx-target="#row-@Model.Id" hx-include="#form-row-@Model.Id" hx-swap="outerHTML">Save</button>
+        <button type="button" class="btn btn-secondary" hx-get="/RouletteTypes/CancelUpdate/@Model.Id" hx-target="#row-@Model.Id" hx-swap="outerHTML">Cancel</button>
+    </td>
+    </form>
+</tr>
