@@ -2,7 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using System.Linq;
 
-namespace FFXIVGuide.Web.Data;
+namespace FFXIVGuide.Web.Data.Result.Result;
 
 public abstract class PagedRequest<T> : IRequest<PagedResult<T>>, IPagedQuery
 {

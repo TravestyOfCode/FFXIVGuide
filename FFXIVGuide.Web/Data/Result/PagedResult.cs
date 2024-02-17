@@ -1,4 +1,4 @@
-﻿namespace FFXIVGuide.Web.Data;
+﻿namespace FFXIVGuide.Web.Data.Result.Result;
 
 public class PagedResult<T> : Result<List<T>>, IPagedResult
 {

@@ -1,4 +1,5 @@
 ﻿using FFXIVGuide.Web.Data.Instance.Commands;
+using FFXIVGuide.Web.Data.Result;
 using FFXIVGuide.Web.Services;
 
 namespace FFXIVGuide.Web.Data.Instance.Behaviors;

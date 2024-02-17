@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using FFXIVGuide.Web.Data.Result;
 
 namespace FFXIVGuide.Web.Data.RouletteType.Commands;
 

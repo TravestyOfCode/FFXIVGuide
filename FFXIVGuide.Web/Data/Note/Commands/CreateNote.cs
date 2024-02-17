@@ -1,4 +1,6 @@
-﻿namespace FFXIVGuide.Web.Data.Note.Commands;
+﻿using FFXIVGuide.Web.Data.Result;
+
+namespace FFXIVGuide.Web.Data.Note.Commands;
 
 public class CreateNote : IRequest<Result<NoteModel>>
 {

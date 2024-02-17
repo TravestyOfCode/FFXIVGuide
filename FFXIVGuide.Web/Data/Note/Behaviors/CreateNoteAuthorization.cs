@@ -1,4 +1,5 @@
 ﻿using FFXIVGuide.Web.Data.Note.Commands;
+using FFXIVGuide.Web.Data.Result;
 using FFXIVGuide.Web.Services;
 using System.Security.Claims;
 
