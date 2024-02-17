@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Collections.Generic;
 
 namespace FFXIVGuide.Web.Data.Entity;
 
@@ -10,7 +9,7 @@ public class RouletteType
 
     public string Name { get; set; }
 
-    public IEnumerable<Instance> Instances { get; set; }
+    public IEnumerable<Instance> Instances { get; set; } = new List<Instance>();
 }
 
 public class RouletteTypeConfiguration : IEntityTypeConfiguration<RouletteType>

@@ -6,6 +6,16 @@ namespace FFXIVGuide.Web.Data.RouletteType.Queries;
 public class GetRouletteTypeById : IRequest<Result<RouletteTypeModel>>
 {
     public int Id { get; set; }
+
+    public GetRouletteTypeById()
+    {
+
+    }
+
+    public GetRouletteTypeById(int id)
+    {
+        Id = id;
+    }
 }
 
 public class GetRouletteTypeByIdHandler : IRequestHandler<GetRouletteTypeById, Result<RouletteTypeModel>>

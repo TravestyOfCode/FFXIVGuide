@@ -4,6 +4,16 @@ public class CreateRouletteType : IRequest<Result<RouletteTypeModel>>
 {
     public string Name { get; set; }
 
+    public CreateRouletteType()
+    {
+
+    }
+
+    public CreateRouletteType(string name)
+    {
+        Name = name;
+    }
+
     internal Entity.RouletteType AsEntity() => new Entity.RouletteType() { Name = Name };
 }
 

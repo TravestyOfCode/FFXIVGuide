@@ -8,6 +8,17 @@ public class UpdateRouletteType : IRequest<Result<RouletteTypeModel>>
 
     public string Name { get; set; }
 
+    public UpdateRouletteType()
+    {
+
+    }
+
+    public UpdateRouletteType(int id, string name)
+    {
+        Name = name;
+        Id = id;
+    }
+
     internal void MapTo(Entity.RouletteType entity)
     {
         entity.Name = Name;
