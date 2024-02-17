@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace FFXIVGuide.Web.Data.RouletteType.Commands;
 
@@ -6,6 +7,8 @@ public class UpdateRouletteType : IRequest<Result<RouletteTypeModel>>
 {
     public int Id { get; set; }
 
+    [Required]
+    [MaxLength(32)]
     public string Name { get; set; }
 
     public UpdateRouletteType()
