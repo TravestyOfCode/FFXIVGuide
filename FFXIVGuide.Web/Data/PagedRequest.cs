@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace FFXIVGuide.Web.Data;
 
-public class PagedRequest<T> : IRequest<PagedResult<T>>, IPagedQuery
+public abstract class PagedRequest<T> : IRequest<PagedResult<T>>, IPagedQuery
 {
     private int _Page;
     public int Page
