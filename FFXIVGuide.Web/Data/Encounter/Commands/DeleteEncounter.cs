@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FFXIVGuide.Web.Data.Result;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace FFXIVGuide.Web.Data.Encounter.Commands;
