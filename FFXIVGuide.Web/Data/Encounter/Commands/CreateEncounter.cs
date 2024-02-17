@@ -1,6 +1,4 @@
-﻿using FFXIVGuide.Web.Data.Result;
-
-namespace FFXIVGuide.Web.Data.Encounter.Commands;
+﻿namespace FFXIVGuide.Web.Data.Encounter.Commands;
 
 public class CreateEncounter : IRequest<Result<EncounterModel>>
 {
