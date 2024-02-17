@@ -5,6 +5,16 @@ namespace FFXIVGuide.Web.Data.RouletteType.Commands;
 public class DeleteRouletteType : IRequest<Result<Unit>>
 {
     public int Id { get; set; }
+
+    public DeleteRouletteType()
+    {
+
+    }
+
+    public DeleteRouletteType(int id)
+    {
+        Id = id;
+    }
 }
 
 public class DeleteRouletteTypeHandler : IRequestHandler<DeleteRouletteType, Result<Unit>>

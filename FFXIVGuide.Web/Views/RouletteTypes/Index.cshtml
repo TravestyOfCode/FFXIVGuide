@@ -1,0 +1,42 @@
+﻿@model IEnumerable<FFXIVGuide.Web.Data.RouletteType.RouletteTypeModel>
+
+@{
+    ViewData["Title"] = "Roulette Types";
+}
+
+<div class="row justify-content-between border-bottom mb-3">
+    <h1 class="col">@ViewData["Title"]</h1>
+    <div class="col-auto">
+        <button class="btn btn-success"
+                hx-get="/RouletteTypes/Create" hx-target="#new-roulettetype-modal"
+                data-bs-toggle="modal" data-bs-target="#new-roulettetype-modal">
+                Add Roulette Type
+        </button>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+<table class="col-auto table table-striped align-middle w-50">
+    <thead><tr><th>Name</th><th class="text-end">Actions</th></tr></thead>
+    <tbody>
+        @foreach(var rt in Model)
+        {
+            <partial name="EditableRow" for="@rt" />
+        }
+    </tbody>
+</table>
+</div>
+
+<div id="new-roulettetype-modal" class="modal modal-blur fade" style="display: none" aria-hidden="false" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content"></div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>        
+            document.getElementById('new-roulettetype-modal').addEventListener('shown.bs.modal', () => {
+            document.getElementById('Name').focus()});
+    </script>
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,23 @@
+﻿@model FFXIVGuide.Web.Data.RouletteType.Commands.CreateRouletteType
+
+<div class="modal-dialog modal-dialog-centered" >
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Create Roulette Type</h5>
+        </div>
+        <div class="modal-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <form method="post" action="/RouletteTypes/Create" id="new-roulettetype-form">
+                <label for="Name" class="form-label">Name</label>
+                <input asp-for="Name" class="form-control" data-autofocus />
+                <span class="text-danger" asp-validation-for="Name"></span>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" form="new-roulettetype-form" class="btn btn-success"
+                    hx-post="/RouletteTypes/Create" hx-target="#new-roulettetype-modal" hx-include="#new-roulettetype-form">
+                    Create</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+    </div>
+</div>

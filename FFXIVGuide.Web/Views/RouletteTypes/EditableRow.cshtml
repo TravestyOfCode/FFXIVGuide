@@ -1,0 +1,13 @@
+﻿@model FFXIVGuide.Web.Data.RouletteType.RouletteTypeModel
+
+@{
+    var confirmMessage = $"Are you sure you want to delete this RouletteType:\n {Model.Name}";
+}
+
+<tr id="row-@Model.Id">
+    <td>@Model.Name</td>
+    <td class="text-end">
+        <button type="button" class="btn btn-primary" hx-get="/RouletteTypes/Update/@Model.Id" hx-target="#row-@Model.Id" hx-swap="outerHTML">Edit</button>
+        <button type="button" class="btn btn-danger" hx-delete="/RouletteTypes/Delete/@Model.Id" hx-target="#row-@Model.Id" hx-confirm="@confirmMessage">Delete</button>
+    </td>
+</tr>

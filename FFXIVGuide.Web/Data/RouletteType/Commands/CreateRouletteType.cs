@@ -1,8 +1,22 @@
-﻿namespace FFXIVGuide.Web.Data.RouletteType.Commands;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace FFXIVGuide.Web.Data.RouletteType.Commands;
 
 public class CreateRouletteType : IRequest<Result<RouletteTypeModel>>
 {
+    [Required]
+    [MaxLength(32)]
     public string Name { get; set; }
+
+    public CreateRouletteType()
+    {
+
+    }
+
+    public CreateRouletteType(string name)
+    {
+        Name = name;
+    }
 
     internal Entity.RouletteType AsEntity() => new Entity.RouletteType() { Name = Name };
 }

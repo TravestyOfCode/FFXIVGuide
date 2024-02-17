@@ -10,6 +10,8 @@ public class Result : IResult
 
     public bool WasFailure => !WasSuccess;
 
+    public bool WasBadRequest => StatusCode == 400;
+
     public ModelStateDictionary Errors { get; } = new ModelStateDictionary();
 
     public Result(int statusCode)
@@ -61,4 +63,28 @@ public class Result<T> : Result
     }
 
     public T Value { get; set; }
+}
+
+public static class ResultExtensions
+{
+    public static void AddErrors(this ModelStateDictionary ms, Result result)
+    {
+        if (result.WasFailure)
+        {
+            foreach (var property in result.Errors)
+            {
+                foreach (var error in property.Value.Errors)
+                {
+                    if (error.ErrorMessage != null)
+                    {
+                        ms.AddModelError(property.Key, error.ErrorMessage);
+                    }
+                    if (error.Exception != null)
+                    {
+                        ms.TryAddModelException(property.Key, error.Exception);
+                    }
+                }
+            }
+        }
+    }
 }

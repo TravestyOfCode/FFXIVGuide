@@ -10,6 +10,8 @@ public interface IResult
 
     public bool WasFailure { get; }
 
+    public bool WasBadRequest { get; }
+
     public ModelStateDictionary Errors { get; }
 }
 
