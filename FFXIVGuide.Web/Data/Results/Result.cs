@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace FFXIVGuide.Web.Data.Result;
+namespace FFXIVGuide.Web.Data.Results;
 
 public class Result : IResult
 {
