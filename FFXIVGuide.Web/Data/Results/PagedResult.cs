@@ -1,33 +1,31 @@
 ﻿namespace FFXIVGuide.Web.Data.Results;
 
-public class PagedResult<T> : Result<List<T>>, IPagedResult
+public class PagedResult<T> : Result<PagedValue<T>>
 {
-    public int Page { get; set; }
-
-    public int PerPage { get; set; }
-
-    public string SortBy { get; set; }
-
-    public SortOrder SortOrder { get; set; }
-
-    public double TotalPages { get; set; }
-
     public PagedResult(int statusCode, IPagedQuery query) : base(statusCode)
     {
-        Page = query.Page;
-        PerPage = query.PerPage;
-        SortBy = query.SortBy;
-        SortOrder = query.SortOrder;
-        TotalPages = 0;
+        Value = new PagedValue<T>()
+        {
+            Page = query.Page,
+            PerPage = query.PerPage,
+            SortBy = query.SortBy,
+            SortOrder = query.SortOrder,
+            TotalPages = 0,
+            Values = new List<T>()
+        };
     }
 
-    public PagedResult(int statusCode, List<T> value, IPagedQuery query, double totalCount) : base(statusCode, value)
+    public PagedResult(int statusCode, List<T> value, IPagedQuery query, double totalCount) : base(statusCode)
     {
-        Page = query.Page;
-        PerPage = query.PerPage;
-        SortBy = query.SortBy;
-        SortOrder = query.SortOrder;
-        TotalPages = Math.Ceiling(totalCount / query.PerPage);
+        Value = new PagedValue<T>()
+        {
+            Page = query.Page,
+            PerPage = query.PerPage,
+            SortBy = query.SortBy,
+            SortOrder = query.SortOrder,
+            TotalPages = Math.Ceiling(totalCount / query.PerPage),
+            Values = value
+        };
     }
 
     public static PagedResult<T> Ok(List<T> value, IPagedQuery query, double totalCount) => new(200, value, query, totalCount);
