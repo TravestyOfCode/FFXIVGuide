@@ -1,4 +1,4 @@
-﻿using FFXIVGuide.Web.Data;
+using FFXIVGuide.Web.Data;
 using FFXIVGuide.Web.Data.RouletteType;
 using FFXIVGuide.Web.Data.RouletteType.Commands;
 using FFXIVGuide.Web.Data.RouletteType.Queries;
