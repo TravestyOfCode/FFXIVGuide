@@ -1,6 +1,6 @@
 ﻿namespace FFXIVGuide.Web.Data.Results;
 
-public interface IPagedResult : IPagedQuery
+public interface IPagedInfo : IPagedQuery
 {
     public double TotalPages { get; }
 }
