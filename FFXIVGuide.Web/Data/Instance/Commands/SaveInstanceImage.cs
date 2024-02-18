@@ -1,10 +1,6 @@
-﻿using FFXIVGuide.Web.Data.Result;
-using MediatR;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace FFXIVGuide.Web.Data.Instance.Commands;
 

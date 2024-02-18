@@ -1,5 +1,4 @@
-﻿using FFXIVGuide.Web.Data.Result;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 
 namespace FFXIVGuide.Web.Data.RouletteType.Commands;

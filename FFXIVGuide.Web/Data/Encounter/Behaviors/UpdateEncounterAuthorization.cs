@@ -1,5 +1,4 @@
 ﻿using FFXIVGuide.Web.Data.Encounter.Commands;
-using FFXIVGuide.Web.Data.Result;
 
 namespace FFXIVGuide.Web.Data.Encounter.Behaviors;
 

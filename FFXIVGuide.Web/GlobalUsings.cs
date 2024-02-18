@@ -1,4 +1,5 @@
-﻿global using MediatR;
+﻿global using FFXIVGuide.Web.Data.Results;
+global using MediatR;
 global using Microsoft.Extensions.Logging;
 global using System;
 global using System.Collections.Generic;

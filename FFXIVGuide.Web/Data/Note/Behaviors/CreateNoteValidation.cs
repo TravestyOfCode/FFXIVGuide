@@ -1,5 +1,4 @@
 ﻿using FFXIVGuide.Web.Data.Note.Commands;
-using FFXIVGuide.Web.Data.Result;
 using Microsoft.EntityFrameworkCore;
 
 namespace FFXIVGuide.Web.Data.Note.Behaviors;

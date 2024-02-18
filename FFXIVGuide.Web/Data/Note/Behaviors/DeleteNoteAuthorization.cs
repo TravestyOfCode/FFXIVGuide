@@ -1,5 +1,4 @@
 ﻿using FFXIVGuide.Web.Data.Note.Commands;
-using FFXIVGuide.Web.Data.Result;
 using FFXIVGuide.Web.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
