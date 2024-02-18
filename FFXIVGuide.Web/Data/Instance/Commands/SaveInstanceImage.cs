@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+using MediatR;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 
