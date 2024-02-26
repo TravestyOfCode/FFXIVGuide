@@ -1,0 +1,17 @@
+﻿@model FFXIVGuide.Web.Models.Instances.EditingRowModel
+
+@{
+    var rouletteSelectList = new SelectList(Model.RouletteTypes, "Key", "Value", Model.RouletteTypeId);
+}
+
+<tr id="row-@Model.Id">
+    <form id="form-row-@Model.Id">
+        <input type="hidden" asp-for="Id" value="@Model.Id" />
+    <td><input asp-for="Name" class="form-control" value="@Model.Name" autofocus /><span class="text-danger" asp-validation-for="Name"></span></td>
+    <td><select asp-for="RouletteTypeId" class="form-select" asp-items="rouletteSelectList"></select><span class="text-danger" asp-validation-for="RouletteTypeId"></span></td>
+    <td class="text-end">
+        <button type="button" class="btn btn-success" hx-post="/Instances/Update" hx-target="#row-@Model.Id" hx-include="#form-row-@Model.Id" hx-swap="outerHTML">Save</button>
+        <button type="button" class="btn btn-secondary" hx-get="/Instances/CancelUpdate/@Model.Id" hx-target="#row-@Model.Id" hx-swap="outerHTML">Cancel</button>
+    </td>
+    </form>
+</tr>

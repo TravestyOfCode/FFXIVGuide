@@ -1,0 +1,36 @@
+﻿@model FFXIVGuide.Web.Models.Instances.CreateModalModel
+
+@{
+    var rouletteSelectList = new SelectList(Model.RouletteTypes, "Key", "Value", Model.RouletteTypeId);
+}
+
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Create Instance</h5>
+        </div>
+        <div class="modal-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <form method="post" action="/Instances/Create" id="new-instance-form">
+                <div class="form-group mb-3">
+                    <label asp-for="Name" class="form-label"></label>
+                    <input asp-for="Name" class="form-control" data-autofocus />
+                    <span class="text-danger" asp-validation-for="Name"></span>
+                </div>
+                <div class="row">
+                    <label asp-for="RouletteTypeId" class="form-label"></label>
+                    <select asp-for="RouletteTypeId" asp-items="rouletteSelectList">
+                    </select>
+                    <span class="text-danger" asp-validation-for="RouletteTypeId"></span>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button type="button" form="new-instance-form" class="btn btn-success"
+                    hx-post="/Instances/Create" hx-target="#new-instance-modal" hx-include="#new-instance-form">
+                Create
+            </button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+    </div>
+</div>

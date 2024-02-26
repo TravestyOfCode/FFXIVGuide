@@ -6,6 +6,16 @@ namespace FFXIVGuide.Web.Data.Instance.Queries;
 public class GetInstanceById : IRequest<Result<InstanceModel>>
 {
     public int Id { get; set; }
+
+    public GetInstanceById()
+    {
+
+    }
+
+    public GetInstanceById(int id)
+    {
+        Id = id;
+    }
 }
 
 public class GetInstanceByIdHandler : IRequestHandler<GetInstanceById, Result<InstanceModel>>

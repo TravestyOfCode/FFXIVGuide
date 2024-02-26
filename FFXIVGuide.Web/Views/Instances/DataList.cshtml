@@ -1,0 +1,20 @@
+﻿@model PagedValue<FFXIVGuide.Web.Data.Instance.InstanceModel>
+
+<div class="row justify-content-center">
+    <table class="col-auto table table-striped align-middle w-50">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Roulette Type</th>
+                <th class="text-end">Actions</th>
+            </tr>
+        </thead>
+        <tbody id="data-list">
+            @foreach (var instance in Model.Values)
+            {
+                <partial name="EditableRow" for="@instance" />
+            }
+        </tbody>
+        <partial name="_PageNavCaption" for="@Model" />
+    </table>
+</div>

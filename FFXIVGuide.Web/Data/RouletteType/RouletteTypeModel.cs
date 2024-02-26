@@ -16,6 +16,11 @@ public static class RouletteTypeModelExtensions
 {
     public static RouletteTypeModel AsModel(this Entity.RouletteType entity)
     {
+        if (entity == null)
+        {
+            return null;
+        }
+
         return new RouletteTypeModel()
         {
             Id = entity.Id,

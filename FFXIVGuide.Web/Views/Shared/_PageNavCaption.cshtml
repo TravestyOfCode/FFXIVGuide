@@ -1,0 +1,38 @@
+﻿@model IPagedInfo
+
+@{
+    var startNum = Math.Max(1, Math.Min(Model.Page - 2, Model.TotalPages - 4));
+    var endNum = Math.Min(startNum + 4, Model.TotalPages);
+    var pageQuery = $"perpage={Model.PerPage}&sortby={Model.SortBy}&sortorder={Model.SortOrder}";
+    var firstPath = Model.Page == 1 ? string.Empty : $"{Context.Request.Path}?page=1&{pageQuery}";
+    var prevPath = Model.Page == 1 ? string.Empty : $"{Context.Request.Path}?page={Model.Page - 1}&{pageQuery}";
+    var lastPath = Model.Page == Model.TotalPages ? string.Empty : $"{Context.Request.Path}?page={Model.TotalPages}&{pageQuery}";
+    var nextPath = Model.Page == Model.TotalPages ? string.Empty : $"{Context.Request.Path}?page={Model.Page + 1}&{pageQuery}";
+}
+
+<caption>
+
+    <nav class="row justify-content-start">
+        @if (Model.TotalPages > 1) /* Do we have any pages? */
+        {
+            <button type="button" class="col-auto btn mx-1 @(Model.Page==1 ? "btn-outline-primary" : "btn-primary")" disabled="@(Model.Page==1)"
+                    hx-get="@firstPath" hx-target="#data-list">First</button>
+
+            <button type="button" class="col-auto btn mx-1 @(Model.Page==1? "btn-outline-primary" : "btn-primary")" disabled="@(Model.Page==1)"
+                    hx-get="@prevPath" hx-target="#data-list">Prev</button>
+
+            @for (double index = startNum; index <= endNum; index++)
+            {
+                var pagePath = Model.Page == index ? string.Empty : $"{Context.Request.Path}?page={index}&{pageQuery}";
+
+                <button class="col-auto btn mx-1 @(Model.Page==index ? "btn-outline-secondary" : "btn-secondary")" disabled="@(Model.Page == index)"
+                        hx-get="@pagePath" hx-target="#data-list">@index</button>
+            }
+            <button class="col-auto btn mx-1 @(Model.Page==Model.TotalPages ? "btn-outline-primary" : "btn-primary")" disabled="@(Model.Page==Model.TotalPages)"
+                    hx-get="@nextPath" hx-target="#data-list">Next</button>
+
+            <button class="col-auto btn mx-1 @(Model.Page==Model.TotalPages ? "btn-outline-primary" : "btn-primary")" disabled="@(Model.Page==Model.TotalPages)"
+                    hx-get="@lastPath" hx-target="#data-list">Last</button>
+        }
+    </nav>
+</caption>
