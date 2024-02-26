@@ -1,0 +1,13 @@
+﻿@model FFXIVGuide.Web.Data.Instance.InstanceModel
+
+@{
+    var confirmMessage = $"Are you sure you want to delete this Instance:\n {Model.Name}";
+}
+
+<tr id="row-@Model.Id">
+    <td>@Model.Name</td>
+    <td class="text-end">
+        <button type="button" class="btn btn-primary" hx-get="/Instances/Update/@Model.Id" hx-target="#row-@Model.Id" hx-swap="outerHTML">Edit</button>
+        <button type="button" class="btn btn-danger" hx-delete="/Instances/Delete/@Model.Id" hx-target="#row-@Model.Id" hx-confirm="@confirmMessage">Delete</button>
+    </td>
+</tr>
