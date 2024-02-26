@@ -6,6 +6,16 @@ namespace FFXIVGuide.Web.Data.Instance.Commands;
 public class DeleteInstance : IRequest<Result<Unit>>
 {
     public int Id { get; set; }
+
+    public DeleteInstance()
+    {
+
+    }
+
+    public DeleteInstance(int id)
+    {
+        Id = id;
+    }
 }
 
 public class DeleteInstanceHandler : IRequestHandler<DeleteInstance, Result<Unit>>
