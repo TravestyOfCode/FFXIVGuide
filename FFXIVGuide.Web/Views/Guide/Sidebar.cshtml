@@ -6,7 +6,7 @@
     </div>
 
     <input class="form-control mb-3" type="search" name="search" placeholder="Search"
-           hx-post="Guide/Search" hx-trigger="input changed delay:500ms, search" hx-target="#instanceList" hx-indicator=".htmx-indicator">
+           hx-get="Guide/Search" hx-trigger="input changed delay:500ms, search" hx-target="#instanceList" hx-indicator=".htmx-indicator">
 
     <div id="instanceList">
         <partial name="InstanceList" for="@Model.InstanceList" />    

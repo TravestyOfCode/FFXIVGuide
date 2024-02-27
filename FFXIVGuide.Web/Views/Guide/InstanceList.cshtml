@@ -1,9 +1,13 @@
 ﻿@model Dictionary<int, string>
 
-@foreach(var kvp in Model)
+@if (Model != null)
 {
-    <div class="form-check">
-        <input type="radio" id="instance-@kvp.Key" name="instance" value="@kvp.Key" class="form-check-input" />
-        <label class="form-check-label" for="instance-@kvp.Key">@kvp.Value</label>
-    </div>
+    @foreach (var kvp in Model)
+    {
+        <div class="form-check">
+            <input type="radio" id="instance-@kvp.Key" name="id" value="@kvp.Key" class="form-check-input" 
+                   hx-get="/Guide/InstanceDetails" hx-target="#instanceDetails" />
+            <label class="form-check-label" for="instance-@kvp.Key">@kvp.Value</label>
+        </div>
+    }
 }

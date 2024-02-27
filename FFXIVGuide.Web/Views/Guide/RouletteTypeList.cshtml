@@ -1,7 +1,7 @@
 ﻿@model Dictionary<int, string>
 
 <label class="form-label">Roulette Type</label>
-<select class="form-select mb-2">
+<select class="form-select mb-2" name="RouletteTypeId" hx-get="/Guide/InstanceList" hx-target="#instanceList">
     <option value=""></option>
     @foreach(var kvp in Model)
     {

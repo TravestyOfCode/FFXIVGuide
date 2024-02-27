@@ -5,9 +5,10 @@
 }
 
 <div class="container-fluid">
-<div class="row min-vh-100">
-    <partial name="Sidebar" for="Sidebar" />
-
-    <partial name="Details" for="Instance" />
+    <div class="row min-vh-100">
+        <partial name="Sidebar" for="Sidebar" />
+        <div class="col-lg-9" id="instanceDetails">
+            <partial name="InstanceDetails" for="InstanceDetails" />
+        </div>
     </div>
 </div>
