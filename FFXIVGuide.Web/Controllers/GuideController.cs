@@ -1,95 +1,84 @@
-﻿using FFXIVGuide.Web.Models.Guide;
+﻿using FFXIVGuide.Web.Data.Encounter.Queries;
+using FFXIVGuide.Web.Data.Instance.Queries;
+using FFXIVGuide.Web.Data.RouletteType.Queries;
+using FFXIVGuide.Web.Models.Guide;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace FFXIVGuide.Web.Controllers;
 
 public class GuideController : Controller
 {
-    public IActionResult Index()
-    {
-        var result = CreateFakeIndexViewModel();
+    private readonly IMediator _mediator;
 
-        return View(result);
+    public GuideController(IMediator mediator)
+    {
+        _mediator = mediator;
     }
 
-    private static IndexViewModel CreateFakeIndexViewModel()
+    [HttpGet]
+    public async Task<IActionResult> Index(GetAllRouletteTypesAsDict request, CancellationToken cancellationToken)
     {
-        var encounters = new List<EncounterModel>
-        {
-            new EncounterModel()
-            {
-                Id = 1,
-                Name = "Chopper",
-                Notes = new List<string>()
-            {
-                "When he does circle AoE Tank or Melee DPS can stun him.",
-                "Paralyze debuff can be cleansed by healer with Ensuna."
-            }
-            },
-            new EncounterModel()
-            {
-                Id = 2,
-                Name = "Captain Madison",
-                Notes = new List<string>()
-            {
-                "He will run away at about 50% health."
-            }
-            },
-            new EncounterModel()
-            {
-                Id = 3,
-                Name = "Captian Madison",
-                Notes = new List<string>()
-            {
-                "He will summon a pack of wolves around 50% health.",
-                "He will run away at about 25% health."
-            }
-            },
-            new EncounterModel()
-            {
-                Id = 4,
-                Name = "Denn the Orcatoothed",
-                Notes = new List<string>()
-            {
-                "Just focus on the boss, ignoring the bubbling water.",
-                "DPS can use Limit Break at 50% health."
-            }
-            }
-        };
+        var result = await _mediator.Send(request, cancellationToken);
 
-        var rouletteTypeList = new Dictionary<int, string>
+        if (result.WasSuccess)
         {
-            { 1, "Expert" },
-            { 2, "Level 50/60/70/80" },
-            { 3, "Main Scenario" },
-            { 4, "Trials" },
-            { 5, "Alliance Raid" }
-        };
+            var model = new IndexViewModel() { Sidebar = new SidebarViewModel() { RouletteTypeList = result.Value } };
 
-        var instanceList = new Dictionary<int, string>()
-        {
-            { 1, "Satasha" },
-            { 2, "Copperbell Mines" },
-            { 3, "Tam Tara Deepcroft" },
-            { 4, "Some other dungeon" },
-            { 5, "This is not a selection" }
-        };
+            return View(model);
+        }
 
-        return new IndexViewModel()
+        return StatusCode(result.StatusCode);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> InstanceList(GetInstancesAsDictByRouletteTypeId request, CancellationToken cancellationToken)
+    {
+        var result = await _mediator.Send(request, cancellationToken);
+
+        if (result.WasSuccess)
         {
-            Sidebar = new SidebarViewModel()
+            return PartialView(result.Value);
+        }
+
+        return StatusCode(result.StatusCode);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Search(GetInstancesAsDictByNameSearch request, CancellationToken cancellationToken)
+    {
+        var result = await _mediator.Send(request, cancellationToken);
+
+        if (result.WasSuccess)
+        {
+            return PartialView(nameof(InstanceList), result.Value);
+        }
+
+        return StatusCode(result.StatusCode);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> InstanceDetails(GetInstanceById request, CancellationToken cancellationToken)
+    {
+        var result = await _mediator.Send(request, cancellationToken);
+
+        if (result.WasSuccess)
+        {
+            // Get the encounters for the instance
+            var encRequest = new GetEncountersByInstanceId(request.Id, User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+            var encResult = await _mediator.Send(encRequest, cancellationToken);
+
+            if (encResult.WasSuccess)
             {
-                InstanceList = instanceList,
-                RouletteTypeList = rouletteTypeList
-            },
-            Instance = new InstanceDetailModel()
-            {
-                Id = 1,
-                Name = "Sastasha",
-                ImageUrl = "/images/112001_hr1.png",
-                Encounters = encounters
+                result.Value.Encounters = encResult.Value;
+
+                return PartialView(result.Value);
             }
-        };
+
+            return StatusCode(encResult.StatusCode);
+        }
+
+        return StatusCode(result.StatusCode);
     }
 }
