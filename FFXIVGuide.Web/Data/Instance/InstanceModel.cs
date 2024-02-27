@@ -1,4 +1,5 @@
-﻿using FFXIVGuide.Web.Data.RouletteType;
+﻿using FFXIVGuide.Web.Data.Encounter;
+using FFXIVGuide.Web.Data.RouletteType;
 using System.Linq;
 
 namespace FFXIVGuide.Web.Data.Instance;
@@ -14,6 +15,8 @@ public class InstanceModel
     public RouletteTypeModel RouletteType { get; set; }
 
     public string ImageUrl { get; set; }
+
+    public List<EncounterModel> Encounters { get; set; }
 }
 
 public static class InstanceModelExtensions
@@ -26,7 +29,8 @@ public static class InstanceModelExtensions
             Name = entity.Name,
             RouletteTypeId = entity.RouletteTypeId,
             RouletteType = entity.RouletteType.AsModel(),
-            ImageUrl = entity.ImageUrl
+            ImageUrl = entity.ImageUrl,
+            Encounters = entity.Encounters?.Select(p => p.AsModel()).ToList()
         };
     }
 
