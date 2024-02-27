@@ -8,6 +8,22 @@ public class GetEncountersByInstanceId : IRequest<Result<List<EncounterModel>>>
     public int InstanceId { get; set; }
 
     public string OwnerId { get; set; }
+
+    public GetEncountersByInstanceId()
+    {
+
+    }
+
+    public GetEncountersByInstanceId(int instanceId) : this(instanceId, null)
+    {
+
+    }
+
+    public GetEncountersByInstanceId(int instanceId, string ownerId)
+    {
+        InstanceId = instanceId;
+        OwnerId = ownerId;
+    }
 }
 
 public class GetEncountersByInstanceIdHandler : IRequestHandler<GetEncountersByInstanceId, Result<List<EncounterModel>>>
