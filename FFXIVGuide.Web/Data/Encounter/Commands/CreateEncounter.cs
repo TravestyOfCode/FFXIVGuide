@@ -10,6 +10,18 @@ public class CreateEncounter : IRequest<Result<EncounterModel>>
 
     public int Ordinal { get; set; }
 
+    public CreateEncounter()
+    {
+
+    }
+
+    public CreateEncounter(int instanceId, string name, string ownerId)
+    {
+        InstanceId = instanceId;
+        Name = name;
+        OwnerId = ownerId;
+    }
+
     internal Entity.Encounter AsEntity() => new Entity.Encounter()
     {
         OwnerId = OwnerId,
