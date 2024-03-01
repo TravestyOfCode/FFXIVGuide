@@ -47,7 +47,22 @@ public static class InstanceModelExtensions
             Name = p.Name,
             RouletteTypeId = p.RouletteTypeId,
             RouletteType = p.RouletteType.AsModel(),
-            ImageUrl = p.ImageUrl
+            ImageUrl = p.ImageUrl,
+            Encounters = p.Encounters.Select(e => new EncounterModel()
+            {
+                Id = e.Id,
+                InstanceId = e.InstanceId,
+                Name = e.Name,
+                Ordinal = e.Ordinal,
+                OwnerId = e.OwnerId,
+                Notes = e.Notes.Select(n => new Note.NoteModel()
+                {
+                    Id = n.Id,
+                    Description = n.Description,
+                    Ordinal = n.Ordinal,
+                    OwnerId = n.OwnerId
+                }).ToList()
+            }).ToList()
         });
     }
 }
