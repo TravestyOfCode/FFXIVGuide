@@ -3,4 +3,5 @@
 public static class HX
 {
     public static readonly string Refresh = "HX-Refresh";
+    public static readonly string Prompt = "HX-Prompt";
 }

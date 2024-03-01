@@ -1,8 +1,11 @@
-﻿using FFXIVGuide.Web.Data.Encounter.Queries;
+﻿using FFXIVGuide.Web.Data.Encounter.Commands;
+using FFXIVGuide.Web.Data.Encounter.Queries;
 using FFXIVGuide.Web.Data.Instance.Queries;
 using FFXIVGuide.Web.Data.RouletteType.Queries;
 using FFXIVGuide.Web.Models.Guide;
+using FFXIVGuide.Web.Utilities;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using System.Security.Claims;
 
 namespace FFXIVGuide.Web.Controllers;
@@ -80,5 +83,34 @@ public class GuideController : Controller
         }
 
         return StatusCode(result.StatusCode);
+    }
+
+    [HttpPost("[controller]/[action]/{id:int}")]
+    public async Task<IActionResult> Create(int id, CancellationToken cancellationToken)
+    {
+        if (Request.Headers.TryGetValue(HX.Prompt, out var values))
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var request = new CreateEncounter(id, values.FirstOrDefault(), userId);
+
+            var result = await _mediator.Send(request, cancellationToken);
+
+            if (result.WasSuccess)
+            {
+                var instanceResult = await _mediator.Send(new GetInstanceWithEncountersAndNotesById(id, userId), cancellationToken);
+
+                if (instanceResult.WasSuccess)
+                {
+                    return PartialView(nameof(InstanceDetails), instanceResult.Value);
+                }
+
+                return StatusCode(result.StatusCode);
+            }
+
+            return StatusCode(result.StatusCode);
+        }
+
+        return BadRequest();
     }
 }

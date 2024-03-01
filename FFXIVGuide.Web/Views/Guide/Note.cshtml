@@ -1,0 +1,13 @@
+﻿@using System.Security.Claims;
+@model FFXIVGuide.Web.Data.Note.NoteModel
+
+<div role="button" class="border w-100 my-3 p-3" onclick="CopyToClipboard(this)">@Model.Description</div>
+@if(User.Identity?.Name != null)
+{
+    @if(User.FindFirstValue(ClaimTypes.NameIdentifier) == Model.OwnerId)
+    {
+        <div class="float-end">
+            <button class="btn btn-primary">Edit</button>
+        </div>
+    }
+}

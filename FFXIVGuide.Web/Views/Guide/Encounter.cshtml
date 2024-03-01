@@ -2,16 +2,32 @@
 
 <div class="card">
     <div class="card-header" id="encounter-header-@Model.Id">
-        <div class="card-title" role="button" data-bs-toggle="collapse" data-bs-target="#encounter-@Model.Id" aria-expanded="false" aria-controls="encounter-@Model.Id">
-            @Model.Name
+        <div class="card-title row justify-content-between" role="button" data-bs-toggle="collapse" data-bs-target="#encounter-@Model.Id" aria-expanded="false" aria-controls="encounter-@Model.Id">
+            <div class="col-auto">@Model.Name</div>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="col-auto">
+                    <button class="btn btn-primary">Edit</button>
+                    <button class="btn btn-danger">Delete</button>
+                </div>
+            }
         </div>
+        
     </div>
     <div id="encounter-@Model.Id" class="collapse" aria-labelledby="encounter-header-@Model.Id" data-bs-parent="#encounters">
         <div class="card-body">
-            @foreach(var note in Model.Notes)
+            @if (User.Identity.IsAuthenticated)
             {
-                <div role="button" class="border w-100 my-3 p-3" onclick="CopyToClipboard(this)">@note</div>
-            }            
+                <div class="row justify-content-end">
+                    <button class="btn btn-primary col-auto">Add Note</button>
+                    </div>
+            }
+            @foreach (var note in Model.Notes)
+            {
+                <div id="note-@note.Id">
+                    <partial name="Note" for="@note" />
+                </div>
+            }
         </div>
     </div>
 </div>
