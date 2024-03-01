@@ -25,6 +25,11 @@ public static class EncounterModelExtensions
 {
     public static EncounterModel AsModel(this Entity.Encounter entity)
     {
+        if (entity == null)
+        {
+            return null;
+        }
+
         return new EncounterModel()
         {
             Id = entity.Id,
@@ -33,7 +38,7 @@ public static class EncounterModelExtensions
             Instance = entity.Instance.AsModel(),
             Name = entity.Name,
             Ordinal = entity.Ordinal,
-            Notes = entity.Notes.Select(p => p.AsModel())
+            Notes = entity.Notes?.Select(p => p.AsModel())
         };
     }
 
