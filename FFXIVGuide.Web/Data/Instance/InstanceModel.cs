@@ -23,6 +23,11 @@ public static class InstanceModelExtensions
 {
     public static InstanceModel AsModel(this Entity.Instance entity)
     {
+        if (entity == null)
+        {
+            return null;
+        }
+
         return new InstanceModel()
         {
             Id = entity.Id,
