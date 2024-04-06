@@ -38,3 +38,20 @@ internal class RouletteTypeConfiguration : IEntityTypeConfiguration<RouletteType
             .IsClustered(false);
     }
 }
+
+internal static class RouletteTypeExtensions
+{
+    public static Models.RouletteType.RouletteType? AsModel(this RouletteType entity)
+    {
+        if (entity == null)
+        {
+            return null;
+        }
+
+        return new Models.RouletteType.RouletteType()
+        {
+            Id = entity.Id,
+            Name = entity.Name
+        };
+    }
+}
