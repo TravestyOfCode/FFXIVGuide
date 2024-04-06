@@ -1,0 +1,6 @@
+@FFXIVGuideAPI_HostAddress = http://localhost:5295
+
+GET {{FFXIVGuideAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
