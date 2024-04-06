@@ -26,9 +26,10 @@ public class Program
                 config.SignIn.RequireConfirmedEmail = true;
             })
             .AddRoles<IdentityRole>()
-            .AddDefaultTokenProviders()
-            .AddEntityFrameworkStores<ApplicationDbContext>();
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
 
+        builder.Services.AddAuthentication();
 
         builder.Services.AddControllers();
 
