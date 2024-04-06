@@ -37,6 +37,11 @@ public class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
+        builder.Services.AddMediatR(config =>
+        {
+            config.RegisterServicesFromAssembly(System.Reflection.Assembly.GetExecutingAssembly());
+        });
+
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
