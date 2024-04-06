@@ -2,7 +2,7 @@
 
 namespace FFXIVGuideAPI.Data;
 
-public class ApplicationUser : IdentityUser
+internal class ApplicationUser : IdentityUser
 {
 
 }

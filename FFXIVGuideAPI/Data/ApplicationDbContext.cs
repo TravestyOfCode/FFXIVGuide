@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FFXIVGuideAPI.Data;
 
-public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+internal class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
     public ApplicationDbContext(DbContextOptions options) : base(options)
     {
