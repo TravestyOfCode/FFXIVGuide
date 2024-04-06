@@ -5,6 +5,8 @@ namespace FFXIVGuideAPI.Data;
 
 internal class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
+    public DbSet<RouletteType> RouletteTypes { get; set; }
+
     public ApplicationDbContext(DbContextOptions options) : base(options)
     {
 
