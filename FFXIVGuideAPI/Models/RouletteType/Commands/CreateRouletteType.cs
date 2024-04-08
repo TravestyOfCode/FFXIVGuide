@@ -1,5 +1,6 @@
 ﻿using FFXIVGuideAPI.Data;
-using FluentResults;
+using FFXIVGuideAPI.Data.Errors;
+using LightResults;
 using MediatR;
 using System.ComponentModel.DataAnnotations;
 using System.Threading;
@@ -56,7 +57,7 @@ internal class CreateRouletteTypeHandler : IRequestHandler<CreateRouletteType, R
         {
             _logger.LogError(ex, "Unexpected error.");
 
-            return Result.Fail("Unexpected error");
+            return AppError.ServerError<RouletteType>();
         }
     }
 }
