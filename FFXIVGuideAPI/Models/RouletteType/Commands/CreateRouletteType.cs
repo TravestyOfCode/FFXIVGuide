@@ -8,20 +8,33 @@ using System.Threading.Tasks;
 
 namespace FFXIVGuideAPI.Models.RouletteType.Commands;
 
+/// <summary>
+/// Represents a command to create a new RouletteType.
+/// </summary>
 public class CreateRouletteType : IRequest<Result<RouletteType>>
 {
     /// <summary>
-    /// The display name of the RouletteType. Must be unique.
+    /// The name of the RouletteType.
+    /// Can not be null or empty and must be unique.
     /// </summary>
     [Required]
     [MaxLength(64)]
     public string Name { get; set; }
 
+    /// <summary>
+    /// Initializes a new instance of <see cref="CreateRouletteType"/> with an empty Name.
+    /// Name is set to string.Empty
+    /// </summary>
     public CreateRouletteType()
     {
         Name = string.Empty;
     }
 
+    /// <summary>
+    /// Initializes a new instance of <see cref="CreateRouletteType"/> with the specified Name.
+    /// </summary>
+    /// <param name="name">The Name of the RouletteType.
+    /// Can not be null or empty and must be unique.</param>
     public CreateRouletteType(string name)
     {
         Name = name;
