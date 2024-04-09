@@ -28,6 +28,18 @@ internal class CreateValidation : IPipelineBehavior<CreateRouletteType, Result<R
     {
         try
         {
+            // Check for empty string
+            if (string.IsNullOrWhiteSpace(request.Name))
+            {
+                return AppError.BadRequest<RouletteType>("Name", "A Name is required.");
+            }
+
+            // Check for max length
+            if (request.Name.Length > 64)
+            {
+                return AppError.BadRequest<RouletteType>("Name", $"Name but be between 1 and 64 characters. The value provided is {request.Name.Length} characters.");
+            }
+
             // Check for duplicate names.
             if (await _dbContext.RouletteTypes.AnyAsync(p => p.Name.Equals(request.Name), cancellationToken))
             {
