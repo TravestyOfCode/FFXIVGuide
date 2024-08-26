@@ -1,0 +1,19 @@
+﻿@model FFXIVGuide.Models.Instance.InstanceModel
+
+@if(Model != null){
+    <h1>@Model.Name</h1>
+    <img src="@Model.ImageLocation" />
+    <h2>@Model.InstanceType.Name</h2>
+    <p>@Model.Description</p>
+
+    @foreach(var encounter in Model.Encounters)
+    {
+        @* // TODO: Encounter Partial*@
+        <h3>@encounter.Name</h3>
+        @* //TODO: EncounterNotes Partial *@
+        @foreach(var note in encounter.EncounterNotes)
+        {
+            <p>@note.Note</p>
+        }
+    }
+}

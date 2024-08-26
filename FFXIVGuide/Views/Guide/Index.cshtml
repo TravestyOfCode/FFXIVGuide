@@ -1,0 +1,13 @@
+﻿@model FFXIVGuide.ViewModels.Guide.Get.IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="row">
+    <div class="sidebar col-2">
+        <partial name="SidebarPartial" for="Sidebar" />
+    </div>
+    <div class="guide-content col">
+        <partial name="GuideContentPartial" for="Content" />
+    </div>
+</div>

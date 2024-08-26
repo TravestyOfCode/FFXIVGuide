@@ -1,0 +1,21 @@
+﻿@model FFXIVGuide.ViewModels.Guide.Get.SidebarModel
+
+<div class="">
+    <h2>Instances</h2>
+    <form>
+        <label for="search" class="form-label">Search Instances</label>
+        <input type="text" id="search" name="search" class="form-control" list="search-results-items"
+                hx-get="search" hx-target="#search-results"
+                hx-trigger="keyup changed delay:1s [document.getElementById('search').value.length > 3]" />
+        <div class="search-results">
+            <partial name="SearchResultsListPartial" for="SearchResultsList" />
+        </div>
+        <hr />
+        <p>Roulette Type</p>
+        <select name="roulette-type" id="roulett-type" >
+            <option value="1">High-Level Dungeon</option>
+            <option value="2">Leveling</option>
+            <option value="3">Main Scenario</option>
+        </select>
+    </form>
+</div>

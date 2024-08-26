@@ -1,0 +1,13 @@
+﻿@model FFXIVGuide.ViewModels.Guide.Get.GuideContentModel
+
+<div class="text-center">
+    @* Do we have a instance selected? *@
+    @if(Model.SelectedInstance == null)
+    {
+        <partial name="NoInstanceSelectedPartial" />
+    }
+    else
+    {
+        <partial name="InstanceContentPartial" for="SelectedInstance" />
+    }
+</div>
